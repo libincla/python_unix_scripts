@@ -1,0 +1,25 @@
+
+log_format  main 
+	
+$1 	$time_local   				
+$2 	$remote_addr    			
+$3 	$http_x_forwarded_for		
+$4 	$host						
+$5 	$server_addr            	
+$6 	$server_port				
+$7 	$request_method				
+$8 	$server_protocol			
+$9 	$scheme://$host$request_uri 
+$10	$args						
+$11 $status 					
+$12 $request_length             
+$13 $bytes_sent					
+$14 $request_time               
+$15 $http_referer               
+$16 $http_user_agent            
+_patient
+$17 $upstream_addr              
+$18 $upstream_status            
+$19 $upstream_response_time     
+$20 $upstream_cache_status      
+$21 $http_cookie                
