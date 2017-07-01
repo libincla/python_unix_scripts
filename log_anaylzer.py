@@ -1,9 +1,20 @@
 #coding:utf-8
 
+import datetime
+from collections import namedtuple
+
 log_format = ('remote_ip', '', '', 'timestamp', 'request', 'status', 'length', 'url', 'ua', '')
 ret = []
 tmp = []
 judge = True
+Request = namedtuple('Request', ['method', 'url', 'version'])
+
+
+def sptime(src):
+    return datetime.datetime.strptime(src,'%d/%b/%Y:%H:%M:%S %z')
+
+def request(src):
+    return Request(*src.split())
 
 def anal(line):
     global judge
@@ -25,6 +36,9 @@ def anal(line):
     ret.append(''.join(tmp))
     result = dict(zip(log_format, ret))
     result.pop('')
+    result['status'] = int(result['status'])
+    result['timestamp'] = sptime(result['timestamp'])
+    result['request']  = request(result['request'])
     #print(result['remote_ip'])
     #print(type(result['remote_ip']))
     return result
